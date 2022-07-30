@@ -10,6 +10,8 @@ export default function Navbar() {
                     <ul id="MenuItems">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/products">Products</Link></li>
+                        <li><Link to="/transfer">Transfer</Link></li>
+                        <li><Link to="/verify">Verify Products</Link></li>
                         <li><Link to="/signup">Register</Link></li>
                         <li><Link to="/login">LogIn</Link></li>
                     </ul>

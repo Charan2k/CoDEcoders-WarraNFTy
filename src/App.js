@@ -7,12 +7,14 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Sproduct from './pages/Sproduct';
+import Verify from './pages/Verify';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Paymenet from './pages/Paymenet';
 import Transfer from './pages/Transfer';
 import Claim from './pages/Claim';
+import Payment from './pages/Payment';
+import Success from './pages/Success';
 
 export function App() {
   return (
@@ -27,7 +29,9 @@ export function App() {
           <Route path="/transfer" element={<Transfer/>} />
           <Route path="/claim" element={<Claim/>} />
           <Route path="/payment/:paymentid" element={<Paymenet/>} />
-          <Route path="/product/:id" element={<Sproduct/>} />
+          <Route path="/product/:id" element={<Payment/>} />
+          <Route path="/success/:id" element={<Success/>} />
+          <Route path="/verify" element = {<Verify/>}/>
         </Routes>
       </div >
     </BrowserRouter >
