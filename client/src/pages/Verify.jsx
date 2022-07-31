@@ -19,7 +19,7 @@ export default function Verify() {
                     <button style={{backgroundColor:'#ff523b',border:'none',outline:'none',width:'195px',height:'45px',color:'white',fontSize:'15px',fontFamily:'Poppins',marginRight:'15px',borderRadius:'5px',fontWeight:'bold'}}>Repair / Replace</button>
                 </div>
                 <div className="verify" style={{marginTop:'54px',display:'flex',flexDirection:'column',textAlign:'left'}}>
-                    <form action="/verifyProduct" method='Get'>
+                    <form action="/verifyProduct" method='GET'>
                         <h4 style={{ fontWeight: 'bold', fontSize: '25px', marginTop: '6px', marginBottom: '16px' }}>Verify Another Product ?</h4>
                         <input type="text" name="uid" style={{height:'40px',paddingLeft:'12px',border:'1px solid #e5dfdf',borderRadius:'6px'}} placeholder="Enter Unique Product ID" />
                         <input type="submit" value="Verify" style={{backgroundColor:'#ff523b',border:'none',outline:'none',width:'195px',height:'45px',color:'white',fontSize:'15px',fontFamily:'Poppins',marginRight:'15px',borderRadius:'5px',fontWeight:'bold',marginTop:'20px'}}/>
