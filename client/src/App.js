@@ -32,7 +32,7 @@ export function App() {
         await authenticate({signingMessage: "Log in using Moralis" })
           .then(function (user) {
             console.log("logged in user:", user);
-            localStorage.setItem("uid",user.id);
+            localStorage.setItem("walletID",user.get("ethAddress"));
             console.log(user.get("ethAddress"));
           })
           .catch(function (error) {
@@ -43,7 +43,7 @@ export function App() {
 
     const logOut = async () => {
       await logout();
-      console.log("logged out");
+      alert("You have been logged out");
     }
   return (
     <BrowserRouter>
@@ -55,7 +55,7 @@ export function App() {
           <Route path="/transfer" element={<Transfer/>} />
           <Route path="/claim" element={<Claim/>} />
           <Route path="/payment/:paymentid" element={<Paymenet/>} />
-          <Route path="/product/:id" element={<Payment/>} />
+          <Route path="/product/:id" element={<Payment isAuthenticated={isAuthenticated}/>} />
           <Route path="/success/:id" element={<Success/>} />
           <Route path="/verify" element = {<Verify/>}/>
         </Routes>

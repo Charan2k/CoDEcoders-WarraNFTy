@@ -1,6 +1,22 @@
 import React from 'react'
 
 export default function Verify() {
+    async function verify(){
+        var response = await fetch("http://localhost:5069/verifyProduct", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            
+            //make sure to serialize your JSON body
+            body: JSON.stringify({
+                uid: document.getElementById("uid").value
+            })
+        })
+        var data = await response.json();
+        console.log(data);
+    }
     return (
         <div style={{ width: '70vw', margin: 'auto', display: 'flex', flexDirection: 'row', marginTop: '29px' }}>
             <div className="image" style={{ width: '45%', display: 'flex' }}>
@@ -19,11 +35,9 @@ export default function Verify() {
                     <button style={{backgroundColor:'#ff523b',border:'none',outline:'none',width:'195px',height:'45px',color:'white',fontSize:'15px',fontFamily:'Poppins',marginRight:'15px',borderRadius:'5px',fontWeight:'bold'}}>Repair / Replace</button>
                 </div>
                 <div className="verify" style={{marginTop:'54px',display:'flex',flexDirection:'column',textAlign:'left'}}>
-                    <form action="/verifyProduct" method='GET'>
-                        <h4 style={{ fontWeight: 'bold', fontSize: '25px', marginTop: '6px', marginBottom: '16px' }}>Verify Another Product ?</h4>
-                        <input type="text" name="uid" style={{height:'40px',paddingLeft:'12px',border:'1px solid #e5dfdf',borderRadius:'6px'}} placeholder="Enter Unique Product ID" />
-                        <input type="submit" value="Verify" style={{backgroundColor:'#ff523b',border:'none',outline:'none',width:'195px',height:'45px',color:'white',fontSize:'15px',fontFamily:'Poppins',marginRight:'15px',borderRadius:'5px',fontWeight:'bold',marginTop:'20px'}}/>
-                    </form>
+                    <h4 style={{ fontWeight: 'bold', fontSize: '25px', marginTop: '6px', marginBottom: '16px' }}>Verify Another Product ?</h4>
+                    <input type="text" name="uid" id="uid" style={{height:'40px',paddingLeft:'12px',border:'1px solid #e5dfdf',borderRadius:'6px'}} placeholder="Enter Unique Product ID" />
+                    <button onClick={()=>{verify()}} value="Verify" style={{backgroundColor:'#ff523b',border:'none',outline:'none',width:'195px',height:'45px',color:'white',fontSize:'15px',fontFamily:'Poppins',marginRight:'15px',borderRadius:'5px',fontWeight:'bold',marginTop:'20px'}}>Verify</button>
                 </div>
             </div>
         </div>

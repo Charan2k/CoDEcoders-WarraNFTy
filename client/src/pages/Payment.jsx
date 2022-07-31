@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-function Payment() {
+function Payment(props) {
   var [counter, setCounter] = useState(0);
   const p = useParams();
   const navi = useNavigate();
@@ -30,7 +30,7 @@ function Payment() {
         id: p.id,
         counter: counter,
         purchase_date: new Date().toUTCString(),
-        uid: localStorage.getItem("uid")
+        walletID: localStorage.getItem("walletID")
       })
     })
     var data = await response.json();
@@ -44,7 +44,9 @@ function Payment() {
     <h4 style={{ fontWeight: 'bold', fontSize: '25px', marginTop: '36px', marginBottom: '16px' }}>Confirm Buy</h4>
     <div className="inputs" style={{ display: 'flex', flexDirection: 'column', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
         <input type="text" style={{ height: '49px', paddingLeft: '12px', border: '1px solid #e5dfdf', borderRadius: '6px', width: '450px', marginTop: '20px' }} placeholder="Your Wallet ID" />
-          <button onClick={()=>payment()} style={{ backgroundColor: '#ff523b', border: 'none', outline: 'none', width: '195px', height: '45px', color: 'white', fontSize: '15px', fontFamily: 'Poppins', marginRight: '15px', borderRadius: '5px', fontWeight: 'bold', marginTop: '20px' }}>Confirm</button>
+        {props.isAuthenticated ? 
+          <button onClick={()=>payment()} style={{ cursor:'pointer', backgroundColor: '#ff523b', border: 'none', outline: 'none', width: '195px', height: '45px', color: 'white', fontSize: '15px', fontFamily: 'Poppins', marginRight: '15px', borderRadius: '5px', fontWeight: 'bold', marginTop: '20px' }}>Confirm</button>:
+          <button onClick={()=>alert("You need to login through metamask in order to confirm")} style={{ cursor:'pointer',backgroundColor: '#716F6F', border: 'none', outline: 'none', width: '195px', height: '45px', color: 'white', fontSize: '15px', fontFamily: 'Poppins', marginRight: '15px', borderRadius: '5px', fontWeight: 'bold', marginTop: '20px' }}>Confirm</button>}
     </div>
     </div>
   )
