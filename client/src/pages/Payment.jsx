@@ -18,14 +18,23 @@ function Payment() {
   },[])
   
   async function payment(){
-    var resp = await fetch ('http://localhost:5069/payment', {
-      method: 'POST',
+    var response = await fetch("http://localhost:5069/payment", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    
+      //make sure to serialize your JSON body
       body: JSON.stringify({
         id: p.id,
-        counter: counter
+        counter: counter,
+        purchase_date: new Date().toUTCString(),
+        uid: localStorage.getItem("uid")
       })
     })
-    var data = await resp.json();
+    var data = await response.json();
+    console.log(data);
 
     navi(`/success/${data.uid}`);
   }

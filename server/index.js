@@ -7,10 +7,21 @@ app.use(express.json());
 
 app.post('/payment', (req, res) => {
     const { id, counter } = req.body;
-    console.log(id + "sdsd" +counter);
-    //call for nft mint;
+
+    // database logic and metadata
+    const {purchase_date} = req.body;
+    console.log(purchase_date);
+    const date = new Date(purchase_date);
+    date.setFullYear(date.getFullYear() + 1);
+    const new_date = date.toUTCString();
+    const dbdata = {
+        ...req.body,
+        valid_till: new_date
+    }
+
+    console.log(new_date);
     res.send({
-        uid: Math.ceil(Math.random()*6900) + "charan"
+        uid: Math.ceil(Math.random()*6900) + "charan",
     });
 })
 
