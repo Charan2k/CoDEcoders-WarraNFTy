@@ -29,7 +29,7 @@ app.post('/payment', (req, res) => {
         }
     });
     res.send({
-        uid: uid
+        data: dbdata
     });
 })
 
@@ -44,15 +44,9 @@ app.post('/verifyProduct', (req, res) => {
         const {id, counter, valid_till} = dbdata;
         const date = new Date();
         const current_date = date.toUTCString();
-        if(current_date > valid_till) {
-            res.send({
-                status: "expired"
-            });
-        } else {
-            res.send({
-                status: "valid"
-            });
-        }
+        res.send({
+            data: JSON.parse(data)
+        });
     })
 });
 
