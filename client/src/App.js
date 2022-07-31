@@ -8,24 +8,50 @@ import {
   Route,
 } from "react-router-dom";
 import Verify from './pages/Verify';
-import Register from './pages/Register';
-import Login from './pages/Login';
 import Paymenet from './pages/Paymenet';
 import Transfer from './pages/Transfer';
 import Claim from './pages/Claim';
 import Payment from './pages/Payment';
 import Success from './pages/Success';
+import React, { useEffect } from 'react';
+import { useMoralis } from "react-moralis";
 
 export function App() {
+  const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
+
+    useEffect(() => {
+    if (isAuthenticated) {
+      console.log("Logged in");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
+    const login = async () => {
+      if (!isAuthenticated) {
+
+        await authenticate({signingMessage: "Log in using Moralis" })
+          .then(function (user) {
+            console.log("logged in user:", user);
+            localStorage.setItem("uid",user.id);
+            console.log(user.get("ethAddress"));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }
+
+    const logOut = async () => {
+      await logout();
+      console.log("logged out");
+    }
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar />
+        <Navbar login={login} logOut={logOut} isAuthenticated={isAuthenticated}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/signup" element={<Register/>} />
-          <Route path="/login" element={<Login/>} />
           <Route path="/transfer" element={<Transfer/>} />
           <Route path="/claim" element={<Claim/>} />
           <Route path="/payment/:paymentid" element={<Paymenet/>} />
