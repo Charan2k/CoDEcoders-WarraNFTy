@@ -7,8 +7,8 @@ app.use(express.json());
 
 app.post('/payment', (req, res) => {
     const { id, counter } = req.body;
-    console.log(id + "sdsd" +counter);
-    //call for nft mint;
+
+    // database logic and metadata
     const {purchase_date} = req.body;
     console.log(purchase_date);
     const date = new Date(purchase_date);
