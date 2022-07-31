@@ -18,7 +18,7 @@ function Payment() {
   },[])
   
   async function payment(){
-    var resp = await fetch ('http://localhost:5000/payment', {
+    var resp = await fetch ('http://localhost:5069/payment', {
       method: 'POST',
       body: JSON.stringify({
         id: p.id,
