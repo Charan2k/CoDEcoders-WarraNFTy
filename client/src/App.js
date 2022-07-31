@@ -56,7 +56,7 @@ export function App() {
           <Route path="/claim" element={<Claim/>} />
           <Route path="/payment/:paymentid" element={<Paymenet/>} />
           <Route path="/product/:id" element={<Payment isAuthenticated={isAuthenticated}/>} />
-          <Route path="/success/:id" element={<Success/>} />
+          <Route path="/success" element={<Success/>} />
           <Route path="/verify" element = {<Verify/>}/>
         </Routes>
       </div >

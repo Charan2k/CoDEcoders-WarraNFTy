@@ -1,8 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import Web3 from 'web3';
+import Moralis from "moralis";
+import { useMoralis } from "react-moralis";
+import { contractABI, contractAddress } from '../../contract';
+
+const web3 = new Web3(Web3.givenProvider);
 
 function Payment(props) {
+  const { isAuthenticated, logout, user } = useMoralis();
   var [counter, setCounter] = useState(0);
   const p = useParams();
   const navi = useNavigate();
@@ -35,8 +42,27 @@ function Payment(props) {
     })
     var data = await response.json();
     console.log(data);
-
+    mintNFT(data);
     navi(`/success/${data.uid}`);
+  }
+
+  const imageurl = "https://www.freepik.es/fotos-vectores-gratis/fungible"
+  async function mintNFT(data){
+    const file1 = new Moralis.File("nft", imageurl);
+      await file1.saveIPFS();
+      const file1url = file1.ipfs();
+      const file2 = new Moralis.File(data, {
+        base64: Buffer.from(JSON.stringify(data)).toString("base64"),
+      });
+      await file2.saveIPFS();
+      const metadataurl = file2.ipfs();
+
+      const contract = new web3.eth.Contract(contractABI, contractAddress);
+      const response = await contract.methods
+        .safeMint(metadataurl)
+        .send({ from: user.get("ethAddress") });
+
+
   }
 
   return (

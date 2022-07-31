@@ -16,6 +16,11 @@ export default function Verify() {
         })
         var data = await response.json();
         console.log(data);
+        var pdate = document.getElementById("pdate");
+        var tdate = document.getElementById("tdate");
+        pdate.innerHTML = "<b>Purchase Date: </b>" + data.data.purchase_date;
+        tdate.innerHTML = "<b>Valid Till: </b>" + data.data.valid_till;
+
     }
     return (
         <div style={{ width: '70vw', margin: 'auto', display: 'flex', flexDirection: 'row', marginTop: '29px' }}>
@@ -24,11 +29,8 @@ export default function Verify() {
             </div>
             <div className="rightside" style={{ display: 'flex',flexDirection:'column' }}>
                 <div className="details" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                    <h4 style={{ fontWeight: 'bold', fontSize: '25px', marginTop: '6px', marginBottom: '16px' }}>Shoes HRX</h4>
-                    <p style={{ marginTop: '9px' }}><span style={{ fontWeight: 'bold' }}>Owned by </span>: John Doe</p>
-                    <p style={{ marginTop: '9px' }}><span style={{ fontWeight: 'bold' }}>Purchased Date </span>: 6/9/1969</p>
-                    <p style={{ marginTop: '9px' }}><span style={{ fontWeight: 'bold' }}>Warranty status </span>: NA</p>
-                    <p style={{ marginTop: '9px' }}><span style={{ fontWeight: 'bold' }}>Issuer </span>: NA</p>
+                    <p id='pdate' style={{ marginTop: '9px' }}><b>Purchased Date: </b>6/9/1969</p>
+                    <p id='tdate' style={{ marginTop: '9px' }}><b>Warranty status: </b> NA</p>
                 </div>
                 <div className="buttons" style={{marginTop:'24px'}}>
                     <button style={{backgroundColor:'#ff523b',border:'none',outline:'none',width:'195px',height:'45px',color:'white',fontSize:'15px',fontFamily:'Poppins',marginRight:'15px',borderRadius:'5px',fontWeight:'bold'}}>Claim Warranty</button>
