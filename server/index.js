@@ -29,7 +29,7 @@ app.post('/payment', (req, res) => {
         }
     });
     res.send({
-        data: dbdata
+        data: uid
     });
 })
 

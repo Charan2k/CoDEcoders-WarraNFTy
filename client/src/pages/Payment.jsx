@@ -36,7 +36,7 @@ function Payment(props) {
     var data = await response.json();
     console.log(data);
 
-    navi(`/success/${data.uid}`);
+    navi(`/success/${data.data}`);
   }
 
   return (
